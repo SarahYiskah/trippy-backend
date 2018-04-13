@@ -45,3 +45,4 @@ gem "dotenv-rails", "~> 2.2"
 gem "faker", "~> 1.8"
 gem 'validates_email_format_of'
 gem 'bcrypt', '~> 3.1', '>= 3.1.11'
+gem 'jwt'
