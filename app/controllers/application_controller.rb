@@ -1,37 +1,47 @@
 class ApplicationController < ActionController::API
-  def token_for(user)
-    JWT.encode({ user_id: user.id }, get_secret_key, "HS256")
-  end
+
+  include ActionController::HttpAuthentication::Token::ControllerMethods
+
+  before_action :authenticate!
 
   def get_secret_key
     ENV["SUPER_SECRET_KEY"]
   end
 
-
-  def authorize!
-    if current_user_id.to_s != params[:user_id]
-      render json: { take_a_hike: true}
-    end
+  def issue_token(payload)
+    JWT.encode(payload, get_secret_key)
   end
 
-
-  def try_decode_auth_token
-    auth_token = request.headers["Authorization"]
-    begin
-      decoded = JWT.decode(auth_token, get_secret_key)
-    rescue => e
-      return nil
-    end
-      return decoded
+  def token_for(user)
+    issue_token({ user_id: user.id })
   end
 
+  def user_json(user)
+    {
+      token: token_for(user),
+      user_id: user.id
+    }
+  end
 
   def current_user_id
-    decoded = try_decode_auth_token
-    if decoded
-      return decoded[0]["user_id"]
+    authenticate_or_request_with_http_token do |jwt_token, options|
+      begin
+        decoded_token = JWT.decode(jwt_token, get_secret_key)
+      rescue JWT::DecodeError
+        return nil
+      end
+
+      return decoded_token[0]["user_id"]
     end
-    return nil
   end
+
+  def logged_in?
+    !!current_user_id
+  end
+
+  def authenticate!
+    render json: { get_lost: true }, status: 401 unless logged_in?
+  end
+
 
 end
