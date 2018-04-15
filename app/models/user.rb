@@ -4,7 +4,7 @@ class User < ApplicationRecord
   validates_email_format_of :email, :message => 'is not looking good'
   validates :email, presence: true, uniqueness: true
   validates :name, presence: true
-  # validates :password, presence: true
+  validates :password, presence: true
 
 
   has_many :microposts, dependent: :destroy

@@ -3,11 +3,11 @@ class Api::V1::UsersController < ApplicationController
   # before_action :authorize!, only: [:users_snacks]
 
   def create
-    @user = User.create(name: params[:name], email: params[:email], password: params[:password])
+    @user = User.new(name: params[:name], email: params[:email], password: params[:password])
     # @user.name = params["name"]
     # @user.email = params["email"]
     # @user.password = params["password"]
-    if @user
+    if @user.save
       render json: { user_token: token_for(@user) }
     else
       render json: { errors: @user.errors.full_messages }, :status => :unprocessable_entity
