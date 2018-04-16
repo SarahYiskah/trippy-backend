@@ -1,6 +1,6 @@
 class Api::V1::UsersController < ApplicationController
 
-  # before_action :authorize!, only: [:users_snacks]
+  # before_action :authorize!, only: [:users_following]
   skip_before_action :authenticate!, only: [:create]
 
   def create
@@ -29,18 +29,31 @@ class Api::V1::UsersController < ApplicationController
     end
   end
 
-  # def users_snacks
-  #   unless authorized?
-  #     render json: { take_a_hike: true}
-  #   else
-  #     @user = User.find_by(id: params[:user_id])
-  #     if @user
-  #       render json: @user.snacks
-  #     else
-  #       render json: true, :status => :not_found
-  #     end
-  #   end
-  # end
+  def users_followers
+    unless authorized?
+      render json: { take_a_hike: true}
+    else
+      @user = User.find_by(id: params[:user_id])
+      if @user
+        render json: @user.followers
+      else
+        render json: true, :status => :not_found
+      end
+    end
+  end
+
+  def users_following
+    unless authorized?
+      render json: { take_a_hike: true}
+    else
+      @user = User.find_by(id: params[:user_id])
+      if @user
+        render json: @user.following
+      else
+        render json: true, :status => :not_found
+      end
+    end
+  end
 
   private
 
