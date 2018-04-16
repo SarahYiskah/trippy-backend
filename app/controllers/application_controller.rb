@@ -30,7 +30,6 @@ class ApplicationController < ActionController::API
       rescue JWT::DecodeError
         return nil
       end
-
       return decoded_token[0]["user_id"]
     end
   end
