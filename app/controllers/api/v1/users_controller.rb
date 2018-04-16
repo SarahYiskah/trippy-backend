@@ -12,9 +12,7 @@ class Api::V1::UsersController < ApplicationController
     end
   end
 
-  def authorized?
-    current_user_id.to_s == params[:user_id]
-  end
+
 
   def show
     unless authorized?
@@ -55,18 +53,6 @@ class Api::V1::UsersController < ApplicationController
     end
   end
 
-  def users_itineraries
-    unless authorized?
-      render json: { take_a_hike: true}
-    else
-      @user = User.find_by(id: params[:user_id])
-      if @user
-        render json: @user.itineraries
-      else
-        render json: true, :status => :not_found
-      end
-    end
-  end
 
   def itinerary_activities
     unless authorized?
@@ -82,6 +68,29 @@ class Api::V1::UsersController < ApplicationController
     end
   end
 
+  def users_itineraries
+    unless authorized?
+      render json: { take_a_hike: true}
+    else
+      @user = User.find_by(id: params[:user_id])
+      if @user
+        render json: @user.itineraries
+      else
+        render json: true, :status => :not_found
+      end
+    end
+  end
+
+  def create_user_itinerary
+    @user = User.find_by_id(params[:user_id])
+    @itinerary = Itinerary.create(name: params[:name])
+    @newTrip = UserItinerary.new(user_id: @user.id, itinerary_id: @itinerary.id)
+    if @newTrip.save
+      render json: @user.itineraries
+    else
+      render json: true, :status => :not_found
+    end
+  end
 
   private
 

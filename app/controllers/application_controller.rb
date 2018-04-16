@@ -23,6 +23,10 @@ class ApplicationController < ActionController::API
     }
   end
 
+  def authorized?
+    current_user_id.to_s == params[:user_id]
+  end
+
   def current_user_id
     authenticate_or_request_with_http_token do |jwt_token, options|
       begin
