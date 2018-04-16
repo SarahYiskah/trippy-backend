@@ -55,6 +55,34 @@ class Api::V1::UsersController < ApplicationController
     end
   end
 
+  def users_itineraries
+    unless authorized?
+      render json: { take_a_hike: true}
+    else
+      @user = User.find_by(id: params[:user_id])
+      if @user
+        render json: @user.itineraries
+      else
+        render json: true, :status => :not_found
+      end
+    end
+  end
+
+  def itinerary_activities
+    unless authorized?
+      render json: { take_a_hike: true}
+    else
+      @user = User.find_by(id: params[:user_id])
+      @itinerary = @user.itineraries.find_by_id(params[:itinerary_id])
+      if @itinerary
+        render json: @itinerary.activities
+      else
+        render json: true, :status => :not_found
+      end
+    end
+  end
+
+
   private
 
     def user_params

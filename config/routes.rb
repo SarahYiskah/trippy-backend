@@ -9,6 +9,8 @@ Rails.application.routes.draw do
      get '/users/:user_id', to: 'users#show'
      get '/users/:user_id/followers', to: 'users#users_followers'
      get '/users/:user_id/following', to: 'users#users_following'
+     get '/users/:user_id/itineraries', to: 'users#users_itineraries'
+     get '/users/:user_id/itineraries/:itinerary_id', to: 'users#itinerary_activities'
      post '/sessions', to: 'sessions#create'
    end
  end

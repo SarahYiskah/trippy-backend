@@ -37,6 +37,15 @@ class User < ApplicationRecord
     following.include?(other_user)
   end
 
+  def add_trip(trip)
+    self.itineraries << trip
+  end
+
+  def add_activity(trip_name, activity)
+    trip = self.itineraries.find_by(trip_name)
+    trip.activities << activity
+  end
+
 
   private
 end

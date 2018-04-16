@@ -35,6 +35,7 @@ followers.each { |follower| follower.follow(user) }
 
 # new itinerary
 Itinerary.create(name: 'nyc')
+user = User.create(name: 'sarah', email: 'sarah@email.com', password: 'hello')
 
 #UserIntinerary
 brooke = UserItinerary.create(user_id: 1, itinerary_id: 1)
