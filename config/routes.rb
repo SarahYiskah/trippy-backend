@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   namespace :api do
    namespace :v1 do
      post '/signup', to: 'users#create'
+     get '/users', to: 'users#index'
      get '/users/:user_id', to: 'users#show'
      get '/users/:user_id/followers', to: 'users#users_followers'
      get '/users/:user_id/following', to: 'users#users_following'
