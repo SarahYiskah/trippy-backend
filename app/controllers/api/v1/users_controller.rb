@@ -17,15 +17,15 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def show
-    if authorized?
+    unless authorized?
+      render json: { take_a_hike: true}
+    else
       @user = User.find_by(id: params[:user_id])
       if @user
         render json: @user
       else
         render json: true, :status => :not_found
       end
-    else
-      render json: { take_a_hike: true}
     end
   end
 
