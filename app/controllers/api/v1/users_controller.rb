@@ -18,7 +18,6 @@ class Api::V1::UsersController < ApplicationController
   end
 
 
-
   def show
     unless authorized?
       render json: { take_a_hike: true}
