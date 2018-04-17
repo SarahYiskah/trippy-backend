@@ -8,6 +8,7 @@ Rails.application.routes.draw do
      post '/signup', to: 'users#create'
      get '/users', to: 'users#index'
      get '/users/:user_id', to: 'users#show'
+     post '/users/:user_id/add', to: 'relationships#add_friend'
      get '/users/:user_id/followers', to: 'users#users_followers'
      get '/users/:user_id/following', to: 'users#users_following'
      get '/users/:user_id/itineraries', to: 'users#users_itineraries'
