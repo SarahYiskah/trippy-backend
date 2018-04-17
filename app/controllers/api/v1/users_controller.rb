@@ -17,14 +17,6 @@ class Api::V1::UsersController < ApplicationController
     end
   end
 
-  # def add_friend
-  #   @user = User.find_by(id: params[:user_id])
-  #   @friend = User.find_by(friend_id: params[:friend_id])
-  #   @user.follow(@friend)
-  #   @user.users_followers
-  # end
-
-
 
   def show
     unless authorized?

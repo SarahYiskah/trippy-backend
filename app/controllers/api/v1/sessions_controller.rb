@@ -8,7 +8,8 @@ class Api::V1::SessionsController < ApplicationController
     if @user && @user.authenticate(params["password"])
       render json: {
         token: token_for(@user),
-        user_id: @user.id
+        user_id: @user.id,
+        user_name: @user.name
       }
     else
       render json: { errors: ["those credentials don't match anything we've got in our database"]}, :status => :unprocessable_entity
