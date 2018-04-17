@@ -17,6 +17,7 @@ Rails.application.routes.draw do
      post '/users/:user_id/itineraries/:itinerary_id/activities', to: 'users#create_itinerary_activity'
      post '/sessions', to: 'sessions#create'
      get '/reviews/:user_id', to: 'reviews#index'
+     post '/reviews', to: 'review#create'
    end
  end
 

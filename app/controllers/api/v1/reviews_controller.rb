@@ -12,5 +12,15 @@ class Api::V1::ReviewsController < ApplicationController
     render json: @filt_reviews, include: ['activity', 'user']
   end
 
+  def create
+    @activity = Activity.where(name: params[:content_name], user_id: params[:user_id])
+    @review = Review.new(content: params[:review], user_id: params[:user_id], activity_id: @activity.id)
+    if @review.save
+      render json: @review
+    else
+      render json: true, :status => :not_found
+    end
+  end
+
 
 end
