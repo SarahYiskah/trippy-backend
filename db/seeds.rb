@@ -49,5 +49,25 @@ sarah = ItineraryActivity.create(activity_id: 1, itinerary_id:1)
 
 #new review
 Review.create(content: 'hii', user_id: 1, activity_id: 1)
+Review.create(content: 'hii', user_id: 2, activity_id: 1)
+Review.create(content: 'hii', user_id: 3, activity_id: 1)
+Review.create(content: 'hii', user_id: 4, activity_id: 1)
+Review.create(content: 'hii', user_id: 5, activity_id: 1)
+Review.create(content: 'hii', user_id: 6, activity_id: 1)
+Review.create(content: 'hii', user_id: 7, activity_id: 1)
+Review.create(content: 'hii', user_id: 8, activity_id: 1)
+Review.create(content: 'hii', user_id: 9, activity_id: 1)
+Review.create(content: 'hii', user_id: 10, activity_id: 1)
+Review.create(content: 'hii', user_id: 11, activity_id: 1)
+Review.create(content: 'hii', user_id: 12, activity_id: 1)
+Review.create(content: 'hii', user_id: 13, activity_id: 1)
+Review.create(content: 'hii', user_id: 14, activity_id: 1)
+Review.create(content: 'hii', user_id: 15, activity_id: 1)
+Review.create(content: 'hii', user_id: 16, activity_id: 1)
+Review.create(content: 'hii', user_id: 17, activity_id: 1)
+Review.create(content: 'hii', user_id: 18, activity_id: 1)
+Review.create(content: 'hii', user_id: 19, activity_id: 1)
+Review.create(content: 'hii', user_id: 20, activity_id: 1)
+
 
 User.first.itineraries

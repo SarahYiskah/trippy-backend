@@ -5,13 +5,12 @@ class Api::V1::ReviewsController < ApplicationController
   def index
     @reviews = Review.all
     @user = User.find_by_id(params[:user_id])
-    @filt_reviews = @reviews.select{|review| @user.followers.map{|user| user.id}.include?(review.user_id)}
-    render json: @filt_reviews
+    @filt_reviews = @reviews.select do |review|
+      @user.following.map{|user| user.id}.include?(review.user_id)
+    end
+
+    render json: @filt_reviews, include: ['activity', 'user']
   end
 
-  # def friend_reviews
-  #   @reviews = Review.all
-  #   @filt_reviews = @reviews.select(|review| @user.followers.include(review.user_id))
-  # end
 
 end
