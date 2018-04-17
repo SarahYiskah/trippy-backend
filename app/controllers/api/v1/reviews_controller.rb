@@ -14,7 +14,7 @@ class Api::V1::ReviewsController < ApplicationController
 
   def create
     @activity = Activity.where(name: params[:content_name], user_id: params[:user_id])
-    @review = Review.new(content: params[:review], user_id: params[:user_id], activity_id: @activity.id)
+    @review = Review.new(content: params[:review], user_id: params[:user_id], activity_id: @activity[0].id)
     if @review.save
       render json: @review
     else
