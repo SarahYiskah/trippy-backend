@@ -92,6 +92,26 @@ class Api::V1::UsersController < ApplicationController
     end
   end
 
+  def create_itinerary_activity
+    @user = User.find_by_id(params[:user_id])
+    @itinerary = @user.itineraries.find_by_id(params[:itinerary_id])
+    found_activity = Activity.where(url: params[:url], name: params[:name], latitude: params[:latitude], longitude: params[:longitude], formatted_address: params[:formatted_address])
+    if found_activity.length == 0
+      @activity = Activity.new(url: params[:url], name: params[:name], latitude: params[:latitude], longitude: params[:longitude], formatted_address: params[:formatted_address], tip: params[:tip], user_id: params[:user_id])
+      @newActivity = ItineraryActivity.create(itinerary_id: @itinerary.id, activity_id: @activity.id)
+    elsif ItineraryActivity.new(itinerary_id: params[:itinerary_id], activity_id: found_activity[0].id).length == 0
+      @newActivity = ItineraryActivity.create(itinerary_id: @itinerary.id, activity_id: found_activity[0].id)
+    else
+      @newActivity = found_activity[0]
+    end
+
+    if @newActivity.save
+      render json: @itinerary.activities
+    else
+      render json: true, :status => :not_found
+    end
+  end
+
   private
 
     def user_params

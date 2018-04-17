@@ -12,6 +12,7 @@ Rails.application.routes.draw do
      get '/users/:user_id/itineraries', to: 'users#users_itineraries'
      post '/users/:user_id/itineraries', to: 'users#create_user_itinerary'
      get '/users/:user_id/itineraries/:itinerary_id', to: 'users#itinerary_activities'
+     post '/users/:user_id/itineraries/:itinerary_id/activities', to: 'users#create_itinerary_activity'
      post '/sessions', to: 'sessions#create'
    end
  end

@@ -41,7 +41,7 @@ user = User.create(name: 'sarah', email: 'sarah@email.com', password: 'hello')
 brooke = UserItinerary.create(user_id: 1, itinerary_id: 1)
 
 #new activity
-starbucks = Activity.create(name: 'Starbucks', category: 'restaurant', longitude: 0.0, latitude: 0.0)
+starbucks = Activity.create(name: 'Starbucks', url: 'starbucks.com', formatted_address: 'Broadway 11', longitude: 0.0, latitude: 0.0)
 
 #join
 sarah = ItineraryActivity.create(activity_id: 1, itinerary_id:1)

@@ -17,7 +17,9 @@ ActiveRecord::Schema.define(version: 20180413142418) do
 
   create_table "activities", force: :cascade do |t|
     t.string "name"
-    t.string "category"
+    t.string "url"
+    t.string "formatted_address"
+    t.string "tip"
     t.float "longitude"
     t.float "latitude"
     t.integer "user_id"
