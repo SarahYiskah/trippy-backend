@@ -12,6 +12,8 @@ Rails.application.routes.draw do
      get '/users/:user_id/followers', to: 'users#users_followers'
      get '/users/:user_id/following', to: 'users#users_following'
      get '/users/:user_id/itineraries', to: 'users#users_itineraries'
+     get '/friends/:friend_id/itineraries', to: 'users#friend_itineraries'
+     get '/friends/:friend_id/itineraries/:itinerary_id/activities', to: 'users#friend_activities'
      post '/users/:user_id/itineraries', to: 'users#create_user_itinerary'
      get '/users/:user_id/itineraries/:itinerary_id', to: 'users#itinerary_activities'
      post '/users/:user_id/itineraries/:itinerary_id/activities', to: 'users#create_itinerary_activity'

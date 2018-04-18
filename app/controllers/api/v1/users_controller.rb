@@ -1,7 +1,7 @@
 class Api::V1::UsersController < ApplicationController
 
   # before_action :authorize!, only: [:users_following]
-  skip_before_action :authenticate!, only: [:index, :create]
+  skip_before_action :authenticate!, only: [:index, :create, :friend_itineraries, :friend_activities]
 
   def index
     @users = User.all
@@ -91,6 +91,25 @@ class Api::V1::UsersController < ApplicationController
     @newTrip = UserItinerary.new(user_id: @user.id, itinerary_id: @itinerary.id)
     if @newTrip.save
       render json: @user.itineraries
+    else
+      render json: true, :status => :not_found
+    end
+  end
+
+  def friend_itineraries
+    @friend = User.find_by(id: params[:friend_id])
+    if @friend
+      render json: @friend.itineraries
+    else
+      render json: true, :status => :not_found
+    end
+  end
+
+  def friend_activities
+    @friend = User.find_by(id: params[:friend_id])
+    @itinerary = @friend.itineraries.find_by_id(params[:itinerary_id])
+    if @itinerary
+      render json: @itinerary.activities
     else
       render json: true, :status => :not_found
     end
