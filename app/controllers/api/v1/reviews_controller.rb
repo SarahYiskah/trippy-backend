@@ -3,6 +3,11 @@ class Api::V1::ReviewsController < ApplicationController
   skip_before_action :authenticate!, only: [:index]
 
   def index
+    @reviews = Review.where(user_id: params[:user_id])
+    render json: @reviews, include: ['activity', 'user']
+  end
+
+  def friend_reviews
     @reviews = Review.all
     @user = User.find_by_id(params[:user_id])
     @filt_reviews = @reviews.select do |review|
