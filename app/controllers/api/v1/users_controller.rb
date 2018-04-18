@@ -138,6 +138,14 @@ class Api::V1::UsersController < ApplicationController
     end
   end
 
+  def delete_itinerary_activity
+    @user = User.find_by_id(params[:user_id])
+    @itinerary = @user.itineraries.find_by_id(params[:itinerary_id])
+    itinerary_activity = ItineraryActivity.where(itinerary_id: @itinerary.id, activity_id: params[:activity_id])
+    itinerary_activity[0].destroy
+    render json: @itinerary.activities
+  end
+
   private
 
     def user_params

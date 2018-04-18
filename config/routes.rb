@@ -17,6 +17,7 @@ Rails.application.routes.draw do
      post '/users/:user_id/itineraries', to: 'users#create_user_itinerary'
      get '/users/:user_id/itineraries/:itinerary_id', to: 'users#itinerary_activities'
      post '/users/:user_id/itineraries/:itinerary_id/activities', to: 'users#create_itinerary_activity'
+     delete '/users/:user_id/itineraries/:itinerary_id/activities/:activity_id', to: 'users#delete_itinerary_activity'
      post '/sessions', to: 'sessions#create'
      get '/reviews/:user_id', to: 'reviews#friend_reviews'
      get '/users/:user_id/reviews', to: 'reviews#index'
